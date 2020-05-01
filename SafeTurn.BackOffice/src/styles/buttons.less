@@ -1,3 +1,9 @@
+button[disabled] {
+	background: #ccc;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
 .btn {
 	display: inline-block;
 	vertical-align: middle;
@@ -8,9 +14,15 @@
 	background-color: transparent;
 	padding: 0.5rem;
 	cursor: pointer;
-	color: @primary-color;
+	font-size: 1rem;
 
 	&--bordered {
 		border: 1px solid @primary-color;
+		color: @primary-color;
+	}
+
+	&-primary {
+		background: @primary-color;
+		color: white;
 	}
 }
