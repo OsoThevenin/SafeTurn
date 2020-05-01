@@ -1,13 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import { StyleSheet, Text, View, Button, Alert, Platform, StatusBar } from 'react-native';
 import Header from './src/components/header';
-import Navigator from './src/routes/homeStack';
+import Home from './src/screens/home';
+import Settings from './src/screens/settings';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Header></Header>
-      <Navigator />
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Safe Turn" component={Home} />
+          <Stack.Screen name="Change Name" component={Settings} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }

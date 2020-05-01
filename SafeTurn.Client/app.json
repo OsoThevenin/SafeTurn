@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "HelloWorld",
+    "name": "SafeTurn",
     "slug": "SafeTurn.Client",
     "platforms": [
       "ios",
