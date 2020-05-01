@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SafeTurn.Application.Turns;
+using System;
 using System.Collections.Generic;
 
 namespace SafeTurn.Api.Turns
@@ -16,11 +17,20 @@ namespace SafeTurn.Api.Turns
             _createTurn = createTurn;
         }
 
-        [HttpGet]
-        public ActionResult<List<string>> Get()
+        [HttpPost]
+        public ActionResult<List<string>> Post(CreateTurnModel model)
         {
-            _createTurn.Execute(new CreateTurnModel() { ClientName = "asd" });
-            return Ok("hola");
+            try
+            {
+                _createTurn.Execute(model);
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+                if (e.Message == "No disponible") return Conflict();
+                throw;
+            }
         }
     }
 }

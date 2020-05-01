@@ -134,6 +134,42 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Code");
+
+                    b.Property<TimeSpan>("FridayEnd");
+
+                    b.Property<TimeSpan>("FridayStart");
+
+                    b.Property<int>("MinutesForTurn");
+
+                    b.Property<TimeSpan>("MondayEnd");
+
+                    b.Property<TimeSpan>("MondayStart");
+
+                    b.Property<string>("Name");
+
+                    b.Property<TimeSpan>("SaturdayEnd");
+
+                    b.Property<TimeSpan>("SaturdayStart");
+
+                    b.Property<int>("SimultaneousTurns");
+
+                    b.Property<TimeSpan>("SundayEnd");
+
+                    b.Property<TimeSpan>("SundayStart");
+
+                    b.Property<TimeSpan>("ThursdayEnd");
+
+                    b.Property<TimeSpan>("ThursdayStart");
+
+                    b.Property<TimeSpan>("TuesdayEnd");
+
+                    b.Property<TimeSpan>("TuesdayStart");
+
+                    b.Property<TimeSpan>("WednesdayEnd");
+
+                    b.Property<TimeSpan>("WednesdayStart");
+
                     b.HasKey("Id");
 
                     b.ToTable("Shops");
@@ -146,7 +182,15 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
 
                     b.Property<string>("ClientName");
 
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("Number");
+
+                    b.Property<Guid>("ShopId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ShopId");
 
                     b.ToTable("Turns");
                 });
@@ -266,6 +310,14 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
                     b.HasOne("SafeTurn.Persistence.DataAccess.Identity.User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("SafeTurn.Domain.Turns.Turn", b =>
+                {
+                    b.HasOne("SafeTurn.Domain.Shops.Shop", "Shop")
+                        .WithMany("Turns")
+                        .HasForeignKey("ShopId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

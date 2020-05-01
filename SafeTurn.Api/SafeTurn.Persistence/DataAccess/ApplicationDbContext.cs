@@ -26,5 +26,12 @@ namespace SafeTurn.Persistence.DataAccess
             LogModelBuilderHelper.Build(modelBuilder.Entity<Log>());
             modelBuilder.Entity<Log>().ToTable("Logs");
         }
+
+        public void Save()
+        {
+            SaveChanges();
+        }
+
+        //TODO: transactions
     }
 }

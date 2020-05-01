@@ -2,8 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SafeTurn.Application.Interfaces.Persistence;
 using SafeTurn.Persistence.DataAccess;
 using SafeTurn.Persistence.DataAccess.Identity;
+using SafeTurn.Persistence.Shared;
+using SafeTurn.Persistence.Shops;
+using SafeTurn.Persistence.Turns;
 
 namespace PriceManager.IoC
 {
@@ -21,8 +25,9 @@ namespace PriceManager.IoC
 
         public static void RegisterRepository(IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
-            //services.AddScoped<IClientCountryRepository, ClientCountryRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IShopRepository, ShopRepository>();
+            services.AddScoped<ITurnRepository, TurnRepository>();
 
         }
 
