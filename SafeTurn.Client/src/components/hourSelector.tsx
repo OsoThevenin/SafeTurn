@@ -10,6 +10,7 @@ export default function HourSelector(props: any) {
     if (props.displaying) {
         return (
             <View >
+                <Text>Pedir turno en {props.shopName}</Text>
                 <View style={styles.buttonContainer}>
                     <View style={styles.buttonL}>
                         <SecondaryButton title="Ahora" onPress={handleButtonClick} />

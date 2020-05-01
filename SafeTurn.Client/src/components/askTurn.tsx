@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 import HourSelector from './hourSelector';
 import PrimaryButton from './primaryButton';
+import { ApiService } from '../services/api.service';
 
 export default function AskTurn() {
-    const [value, onChangeText] = React.useState('');
-    const [displayButtons, setDisplayButtons] = React.useState(false);
+    const [text, onChangeText] = useState('');
+    const [displayButtons, setDisplayButtons] = useState(false);
+    const [buttonActive, setButtonActive] = useState(false);
+    const [shopName, setShopName] = useState('');
 
     const handleButtonOnPress = () => {
         setDisplayButtons(!displayButtons);
+        fetch(`http://itequia-covid19hack-dev.azurewebsites.net/shops?code=${text}`)
+            .then((response) => response.json())
+            .then((json) => setShopName(json.name))
+            .catch((error) => console.error(error));
+    }
+
+    const handleOnChangeText = (text: string) => {
+        onChangeText(text);
+        if (text.length >= 5) {
+            console.log("hi");
+            setButtonActive(true);
+        } else {
+            setButtonActive(false);
+        }
     }
 
     return (
@@ -16,12 +33,12 @@ export default function AskTurn() {
             <Text>Introduce el código del comercio</Text>
             <TextInput
                 style={styles.textInput}
-                value={value}
+                value={text}
                 placeholder="Código del comercio"
-                onChangeText={text => onChangeText(text)}
+                onChangeText={text => handleOnChangeText(text)}
             />
-            <PrimaryButton title="Pedir Turno" onPress={handleButtonOnPress} />
-            <HourSelector displaying={displayButtons} />
+            <PrimaryButton active={buttonActive} title="Pedir Turno" onPress={handleButtonOnPress} />
+            <HourSelector shopName={shopName} displaying={displayButtons} />
         </View>
     )
 }
