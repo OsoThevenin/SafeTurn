@@ -1,17 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import Header from './src/components/header';
+import Navigator from './src/routes/homeStack';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>SaveTurn App</Text>
-      <Text>Itequia Covid19</Text>
-      <Button
-        onPress={() => Alert.alert('Has apretat el botó')}
-        title="Botó sense utilitat"
-        color="#841584"
-        accessibilityLabel="Learn more about this purple button"
-      />
+      <Header></Header>
+      <Navigator />
     </View>
   );
 }
@@ -20,7 +16,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
