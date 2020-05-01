@@ -6,7 +6,6 @@ import Navigator from './src/routes/homeStack';
 export default function App() {
   return (
     <View style={styles.container}>
-      <Header></Header>
       <Navigator />
     </View>
   );
