@@ -4,6 +4,7 @@ export default class StorageService {
     static storeData = async (key: string, value: any) => {
         try {
             await AsyncStorage.setItem(key, value)
+            alert(value)
         } catch (e) {
             // saving error
         }
@@ -16,6 +17,7 @@ export default class StorageService {
                 // value previously stored
                 return value;
             }
+            return null;
         } catch(e) {
         // error reading value
         }

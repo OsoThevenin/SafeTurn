@@ -27,6 +27,7 @@ export default function App({ navigation }: { navigation: any }) {
             component={Settings}
             options={{
               title: 'Change Name',
+              headerShown: false
             }}
           />
         </Stack.Navigator>

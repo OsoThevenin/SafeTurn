@@ -4,13 +4,12 @@ import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 export default function PrimaryButton(props: any) {
     const handleOnPress = () => {
         if (props.active) {
-            console.log("HELLO");
             props.onPress();
         }
     }
 
     return (
-        <TouchableOpacity style={styles.container} onPress={props.handleOnPress}>
+        <TouchableOpacity style={styles.container} onPress={handleOnPress}>
             <Text style={styles.text}>{props.title}</Text>
         </TouchableOpacity>
     )
