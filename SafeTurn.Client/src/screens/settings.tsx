@@ -27,7 +27,7 @@ export default function Settings({ navigation }: { navigation: any }) {
                 />
             </View>
             <View style={styles.inputContainer}>
-                <Input textChanged={handleInputChange}></Input>
+                <Input title="Nom complet" placeholder="Introdueix el teu nom" textChanged={handleInputChange}></Input>
             </View>
             <View style={styles.buttonContainer}>
                 <PrimaryButton active={true} title="Guardar" onPress={handleButtonOnPress} />

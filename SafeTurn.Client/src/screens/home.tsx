@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import * as Font from 'expo-font';
 import Splash from '../components/splash';
-import AskTurn from '../components/askTurn';
-import MyShopsList from '../components/myShopsList';
+import AskTurn from '../containers/askTurn';
+import MyShopsList from '../containers/myShopsList';
 import StorageService from '../services/storage.service';
 import { CLIENT_NAME } from '../constants/app-constants';
 
@@ -42,7 +42,6 @@ export default function Home({ navigation }: { navigation: any }) {
             <View style={styles.homeContainer}>
                 <AskTurn />
                 <MyShopsList />
-                {/* <Button title="Change Name" onPress={pressHandler} /> */}
             </View>
         )
     }

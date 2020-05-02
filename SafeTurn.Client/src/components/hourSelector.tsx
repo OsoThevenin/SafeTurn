@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import SecondaryButton from './secondaryButton';
 
 export default function HourSelector(props: any) {
-    const handleButtonClick = () => {
+    const [availableHours, setAvailableHours] = useState([false, false, false, true, false, false]);
 
+    const handleButtonClick = () => {
+        console.log(props.hours);
     }
+
+    useEffect(() => {
+
+    }, []);
 
     if (props.displaying) {
         return (
