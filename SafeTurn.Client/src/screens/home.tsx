@@ -4,9 +4,12 @@ import * as Font from 'expo-font';
 import Splash from '../components/splash';
 import AskTurn from '../containers/askTurn';
 import MyShopsList from '../containers/myShopsList';
+import StorageService from '../services/storage.service';
+import { CLIENT_NAME } from '../constants/app-constants';
 
 export default function Home({ navigation }: { navigation: any }) {
     const [fontReady, setFontReady] = useState(false);
+    const [userLogged, setUserLogged] = useState(false);
 
     useEffect(() => {
         const loadFont = async () => {
@@ -15,15 +18,21 @@ export default function Home({ navigation }: { navigation: any }) {
             });
             setFontReady(true);
         };
-        loadFont();
+        const checkUserLogged = async () => {
+            await loadFont();
+            const name = await StorageService.getData(CLIENT_NAME);
+
+            if (name === null) {
+                setUserLogged(true);
+            } else {
+                navigation.navigate('Settings')
+            }
+        };
+        checkUserLogged();
     }, []);
 
-    const pressHandler = () => {
-        navigation.navigate('Settings')
-    }
-
-    if (!fontReady) {
-        return (
+    if(!fontReady && !userLogged) {
+        return(
             <View>
                 <Splash></Splash>
             </View>
@@ -33,7 +42,6 @@ export default function Home({ navigation }: { navigation: any }) {
             <View style={styles.homeContainer}>
                 <AskTurn />
                 <MyShopsList />
-                <Button title="Change Name" onPress={pressHandler} />
             </View>
         )
     }
