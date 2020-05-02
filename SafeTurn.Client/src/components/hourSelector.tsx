@@ -3,44 +3,75 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import SecondaryButton from './secondaryButton';
 
 export default function HourSelector(props: any) {
-    const [availableHours, setAvailableHours] = useState([false, false, false, true, false, false]);
+    const [hourNames, setHourNames] = useState(['Ahora', 'En 15 minutos', 'En 30 minutos', 'En 1 hora', 'En 2 horas', 'En 4 horas']);
+    const [availableHours, setAvailableHours] = useState([true, false, false, true, false, false]);
+    const [offers, setOffers] = useState(['', '', '', '', '', '']);
 
     const handleButtonClick = () => {
-        console.log(props.hours);
+        console.log(props.hours[0].range);
     }
 
     useEffect(() => {
-
+        var hours: boolean[] = [];
+        for (var i = 0; i < props.hours.length; i++) {
+            console.log("hora");
+            hours[props.hours[i].range] = true;
+        }
+        setAvailableHours(hours);
     }, []);
 
     if (props.displaying) {
         return (
-            <View >
-                <Text>Pedir turno en {props.shopName}</Text>
+            <View style={styles.container}>
+                <Text>Pedir turno en <Text style={styles.shopName}>{props.shopName}</Text></Text>
                 <View style={styles.buttonContainer}>
                     <View style={styles.buttonL}>
-                        <SecondaryButton title="Ahora" onPress={handleButtonClick} />
+                        <SecondaryButton
+                            active={availableHours[0]}
+                            title={hourNames[0]}
+                            onPress={handleButtonClick}
+                        />
                     </View>
                     <View style={styles.buttonR}>
-                        <SecondaryButton title="En 1 hora" onPress={handleButtonClick} />
+                        <SecondaryButton
+                            active={availableHours[3]}
+                            title={hourNames[3]}
+                            onPress={handleButtonClick}
+                        />
                     </View>
                 </View>
 
                 <View style={styles.buttonContainer}>
                     <View style={styles.buttonL}>
-                        <SecondaryButton title="En 15 minutos" onPress={handleButtonClick} />
+                        <SecondaryButton
+                            active={availableHours[1]}
+                            title={hourNames[1]}
+                            onPress={handleButtonClick}
+                        />
                     </View>
                     <View style={styles.buttonR}>
-                        <SecondaryButton title="En 2 horas" onPress={handleButtonClick} />
+                        <SecondaryButton
+                            active={availableHours[4]}
+                            title={hourNames[4]}
+                            onPress={handleButtonClick}
+                        />
                     </View>
                 </View>
 
                 <View style={styles.buttonContainer}>
                     <View style={styles.buttonL}>
-                        <SecondaryButton title="En 30 minutos" onPress={handleButtonClick} />
+                        <SecondaryButton
+                            active={availableHours[2]}
+                            title={hourNames[2]}
+                            onPress={handleButtonClick}
+                        />
                     </View>
                     <View style={styles.buttonR}>
-                        <SecondaryButton title="En 4 horas" onPress={handleButtonClick} />
+                        <SecondaryButton
+                            active={availableHours[5]}
+                            title={hourNames[5]}
+                            onPress={handleButtonClick}
+                        />
                     </View>
                 </View>
             </View>
@@ -52,6 +83,9 @@ export default function HourSelector(props: any) {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        marginTop: 10,
+    },
     buttonContainer: {
         marginTop: 10,
         flexDirection: 'row',
@@ -64,5 +98,8 @@ const styles = StyleSheet.create({
         alignSelf: "stretch",
         flex: 1,
         marginLeft: 10,
+    },
+    shopName: {
+        fontWeight: 'bold',
     }
 })
