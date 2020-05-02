@@ -1,19 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Button } from 'react-native';
 import StorageService from '../services/storage.service';
 import { CLIENT_NAME } from '../constants/app-constants';
 import Input from '../components/input';
 
 export default function Settings() {
+    const [inputValue, setInputValue] = useState('');
+
+    const handleInputChange = (text: string) => {
+        setInputValue(text);
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.inputContainer}>
-                <Input></Input>
+                <Input textChanged={handleInputChange}></Input>
             </View>
             <View style={styles.buttonContainer}>
                 <Button
                     title="Guardar"
-                    onPress={() => StorageService.storeData(CLIENT_NAME, 'Pere')}
+                    onPress={() => StorageService.storeData(CLIENT_NAME, inputValue)}
                 />
             </View>
         </View>
