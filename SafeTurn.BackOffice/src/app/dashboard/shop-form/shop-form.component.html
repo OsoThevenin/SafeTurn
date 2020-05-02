@@ -1,0 +1,27 @@
+<form [formGroup]="form" (submit)="submit()">
+	<div class="text-right">
+		<button class="btn btn-primary">Guardar</button>
+	</div>
+
+	<div class="form-group">
+		<label for="">Estat</label>
+		<div>
+			<span>Publicat</span>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="">Nom del comerç</label>
+		<input type="text" class="x-lg" formControlName="name">
+	</div>
+
+	<div class="form-group">
+		<label for="">Adreça</label>
+		<input type="text" class="x-lg" formControlName="address">
+	</div>
+
+	<div class="form-group">
+		<label for="">Codi</label>
+		<input type="text" formControlName="shopCode">
+	</div>
+</form>

@@ -7,13 +7,28 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
-export default function App() {
+export default function App({ navigation }: { navigation: any }) {
   return (
     <View style={styles.container}>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Safe Turn" component={Home} />
-          <Stack.Screen name="Change Name" component={Settings} />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{
+              title: 'Safeturn',
+              headerStyle: styles.header,
+              headerTitleStyle: styles.headerTitle,
+            }}
+
+          />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
+            options={{
+              title: 'Change Name',
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
@@ -25,4 +40,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  header: {
+    backgroundColor: '#27A699',
+  },
+  headerTitle: {
+  }
 });

@@ -1,0 +1,59 @@
+.switch {
+	width: 3rem;
+	height: 1rem;
+	position: relative;
+	border-radius: 15px;
+	display: inline-block;
+	padding: 0.5rem;
+	overflow: hidden;
+
+	input {
+		width: 0;
+		height: 0;
+		opacity: 0;
+
+		&:checked {
+
+			& + .slider::before {
+				transform: translateX(100%);
+			}
+
+			& + .slider {
+				background: blue;
+			}
+		}
+	}
+
+	.slider {
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background: #ccc;
+		transition: background 300ms ease-in;
+
+		&::before {
+			border-radius: 100%;
+			background: #ffffff;
+			width: 1rem;
+			height: 100%;
+			position: absolute;
+			top: 4px;
+			left: 4px;
+			transition: transform 300ms ease-in;
+			content: "";
+		}
+	}
+
+
+}
+
+
+.dashboard {
+	margin-top: 2rem;
+}
+
+.actions {
+	text-align: right;
+}

@@ -1,0 +1,14 @@
+@import 'variables';
+
+.menu {
+	display: flex;
+	padding: 3px 0.3rem;
+	color: @primary-color;
+	border-bottom: 1px solid @primary-color;
+
+	> a {
+		&:not(:last-child) {
+			margin-right: 1rem;
+		}
+	}
+}

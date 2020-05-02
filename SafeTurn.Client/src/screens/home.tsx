@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import Splash from '../components/splash';
+import AskTurn from '../components/askTurn';
+import MyShopsList from '../components/myShopsList';
 
 export default function Home({ navigation }: { navigation: any }) {
     const [fontReady, setFontReady] = useState(false);
@@ -18,7 +19,7 @@ export default function Home({ navigation }: { navigation: any }) {
     }, []);
 
     const pressHandler = () => {
-        navigation.navigate('Change Name')
+        navigation.navigate('Settings')
     }
 
     if(!fontReady) {
@@ -29,10 +30,18 @@ export default function Home({ navigation }: { navigation: any }) {
         )
     } else {
         return (
-            <View>
-                <Text>Home</Text>
+            <View style={styles.homeContainer}>
+                <AskTurn />
+                <MyShopsList />
                 <Button title="Change Name" onPress={pressHandler} />
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    homeContainer: {
+        paddingHorizontal: 20,
+        paddingTop: 20,
+    },
+})
