@@ -47,11 +47,5 @@ namespace SafeTurn.Api.Turns
             _createShop.Execute(model);
             return Ok();
         }
-
-        [HttpPost]
-        public ActionResult<List<string>> Post()
-        {
-            return Ok();
-        }
     }
 }
