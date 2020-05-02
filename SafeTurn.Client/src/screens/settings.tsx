@@ -14,7 +14,7 @@ export default function Settings() {
     return (
         <View style={styles.container}>
             <View style={styles.inputContainer}>
-                <Input textChanged={handleInputChange}></Input>
+                <Input title="Nom complet" placeholder="Introdueix el teu nom" textChanged={handleInputChange}></Input>
             </View>
             <View style={styles.buttonContainer}>
                 <Button

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import * as Font from 'expo-font';
 import Splash from '../components/splash';
-import AskTurn from '../components/askTurn';
-import MyShopsList from '../components/myShopsList';
+import AskTurn from '../containers/askTurn';
+import MyShopsList from '../containers/myShopsList';
 
 export default function Home({ navigation }: { navigation: any }) {
     const [fontReady, setFontReady] = useState(false);
@@ -22,8 +22,8 @@ export default function Home({ navigation }: { navigation: any }) {
         navigation.navigate('Settings')
     }
 
-    if(!fontReady) {
-        return(
+    if (!fontReady) {
+        return (
             <View>
                 <Splash></Splash>
             </View>

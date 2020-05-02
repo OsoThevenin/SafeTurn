@@ -2,16 +2,16 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 
-export default function Input({ textChanged }: { textChanged: any }) {
+export default function Input(props: any) {
     return (
         <View style={styles.content}>
-            <Text style={styles.nameLabel}>NOM COMPLET</Text>
+            <Text style={styles.nameLabel}>{props.title}</Text>
             <View style={styles.inputView}>
-                <TextInput 
+                <TextInput
                     style={styles.input}
-                    placeholder="Introdueix el teu nom" 
+                    placeholder={props.placeholder}
                     placeholderTextColor="#BFC5D2"
-                    onChangeText={text => textChanged(text)}
+                    onChangeText={text => props.textChanged(text)}
                 ></TextInput>
             </View>
         </View>
@@ -20,7 +20,7 @@ export default function Input({ textChanged }: { textChanged: any }) {
 
 const styles = StyleSheet.create({
     content: {
-        width: "80%",
+        width: "100%",
     },
     inputView: {
         width: "100%",
@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
         letterSpacing: 0.19,
-        lineHeight: 20
+        lineHeight: 20,
+        textTransform: 'uppercase'
     }
 })

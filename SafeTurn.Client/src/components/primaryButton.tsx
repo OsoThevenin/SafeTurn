@@ -10,16 +10,20 @@ export default function PrimaryButton(props: any) {
     }
 
     return (
-        <TouchableOpacity style={styles.container} onPress={props.handleOnPress}>
+        <TouchableOpacity style={props.active ? styles.activeButton : styles.nonActiveButton} onPress={handleOnPress}>
             <Text style={styles.text}>{props.title}</Text>
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
+    activeButton: {
         backgroundColor: '#FA5A5E',
         borderRadius: 20
+    },
+    nonActiveButton: {
+        backgroundColor: '#FA5A5E50',
+        borderRadius: 20,
     },
     text: {
         textAlign: 'center',

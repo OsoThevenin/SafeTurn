@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity, Text } from 'react-native';
 
 export default function SecondaryButton(props: any) {
     return (
-        <TouchableOpacity style={styles.container} onPress={props.onClick}>
+        <TouchableOpacity style={styles.container} onPress={props.onPress}>
             <Text style={styles.text}>{props.title}</Text>
         </TouchableOpacity>
     )
