@@ -18,7 +18,7 @@ namespace SafeTurn.Persistence.Shops
             return _database.Shops.SingleOrDefault(s => s.Code.ToUpper() == code.ToUpper());
         }
 
-        public Shop GetByIdWithTorns(Guid id)
+        public Shop GetByIdWithTurns(Guid id)
         {
             return _database.Shops.AsQueryable()
                 .Include(s => s.Turns)

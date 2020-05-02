@@ -9,6 +9,7 @@ namespace PriceManager.IoC
         public static void RegisterService(IServiceCollection services)
         {
             services.AddScoped<ICreateTurn, CreateTurn>();
+            services.AddScoped<IGetShop, GetShop>();
             services.AddScoped<ICreateShop, CreateShop>();
             services.AddScoped<IGetDisponibilityShop, GetDisponibilityShop>();
         }

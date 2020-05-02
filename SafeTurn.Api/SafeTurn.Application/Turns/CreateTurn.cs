@@ -22,7 +22,7 @@ namespace SafeTurn.Application.Turns
 
         public void Execute(CreateTurnModel model)
         {
-            var shop = _shopRepo.GetByIdWithTorns(model.ShopId);
+            var shop = _shopRepo.GetByIdWithTurns(model.ShopId);
             DateTime dateRangeStart, dateRangeEnd, now = DateTime.Now;
             switch (model.Range)
             {

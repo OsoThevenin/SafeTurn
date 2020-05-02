@@ -33,7 +33,7 @@ namespace PriceManager.Api
             ApplicationRegister.RegisterService(services);
 
             // Adding windows authentication
-            services.AddAuthentication(IISDefaults.AuthenticationScheme);
+            //services.AddAuthentication(IISDefaults.AuthenticationScheme);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +55,7 @@ namespace PriceManager.Api
                 scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
             }
 
-            app.UseAuthentication();
+            //app.UseAuthentication();
             app.UseHttpException();
             app.UseMvc();
         }
