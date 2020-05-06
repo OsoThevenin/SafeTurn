@@ -148,6 +148,8 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<bool>("Published");
+
                     b.Property<TimeSpan>("SaturdayEnd");
 
                     b.Property<TimeSpan>("SaturdayStart");
@@ -181,6 +183,8 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ClientName");
+
+                    b.Property<bool>("Confirmed");
 
                     b.Property<DateTime>("Date");
 

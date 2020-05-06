@@ -13,6 +13,7 @@ namespace SafeTurn.Domain.Turns
         public DateTime Date { get; set; }
         public int Number { get; set; }
         public string ClientName { get; set; }
+        public bool Confirmed { get; set; }
 
         private Turn() { }
 
@@ -22,6 +23,11 @@ namespace SafeTurn.Domain.Turns
             Date = date;
             ClientName = clientName;
             Number = GenerateNumber(numbersUsed);
+        }
+
+        public void ConfirmTurn()
+        {
+            Confirmed = true;
         }
 
         private int GenerateNumber(List<int> numbersUsed)

@@ -32,6 +32,11 @@ namespace SafeTurn.Persistence.Shared
             _database.Set<T>().Add(entity);
         }
 
+        public void Update(T entity)
+        {
+            _database.Set<T>().Update(entity);
+        }
+
         public void Remove(T entity)
         {
             _database.Set<T>().Remove(entity);

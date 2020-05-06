@@ -31,6 +31,8 @@ namespace SafeTurn.Domain.Shops
 
         public List<Turn> Turns { get; set; }
 
+        public bool Published { get; set; }
+
         public Shop(string code, string name)
         {
             Code = code;
@@ -53,7 +55,39 @@ namespace SafeTurn.Domain.Shops
             SaturdayEnd = new TimeSpan(20, 0, 0);
             SundayStart = new TimeSpan(9, 0, 0);
             SundayEnd = new TimeSpan(20, 0, 0);
+        }
 
+        public void Update(string name, int simultaneousTurns, int minutesForTurn)
+        {
+            Name = name;
+            SimultaneousTurns = simultaneousTurns;
+            MinutesForTurn = minutesForTurn;
+
+            //FIXME: hardcoded
+            MondayStart = new TimeSpan(9, 0, 0);
+            MondayEnd = new TimeSpan(20, 0, 0);
+            TuesdayStart = new TimeSpan(9, 0, 0);
+            TuesdayEnd = new TimeSpan(20, 0, 0);
+            WednesdayStart = new TimeSpan(9, 0, 0);
+            WednesdayEnd = new TimeSpan(20, 0, 0);
+            ThursdayStart = new TimeSpan(9, 0, 0);
+            ThursdayEnd = new TimeSpan(20, 0, 0);
+            FridayStart = new TimeSpan(9, 0, 0);
+            FridayEnd = new TimeSpan(20, 0, 0);
+            SaturdayStart = new TimeSpan(9, 0, 0);
+            SaturdayEnd = new TimeSpan(20, 0, 0);
+            SundayStart = new TimeSpan(9, 0, 0);
+            SundayEnd = new TimeSpan(20, 0, 0);
+        }
+
+        public void Publish()
+        {
+            Published = true;
+        }
+
+        public void Unpublish()
+        {
+            Published = false;
         }
 
         public void SetNewTurn(DateTime dateRangeStart, DateTime dateRangeEnd, string clientName)

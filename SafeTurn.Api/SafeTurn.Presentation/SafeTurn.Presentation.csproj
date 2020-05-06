@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <ApplicationIcon />
     <Win32Resource />
@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SafeTurn.Application\SafeTurn.Application.csproj" />
-    <ProjectReference Include="..\SafeTurn.IoC\SafeTurn.IoC.csproj" />
   </ItemGroup>
 
 </Project>
