@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeTurn.IoC", "SafeTurn.Io
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeTurn.Persistence", "SafeTurn.Persistence\SafeTurn.Persistence.csproj", "{D423F9E5-FAAA-4F63-8DDC-471A1E280F15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeTurn.Application", "SafeTurn.Application\SafeTurn.Application.csproj", "{B7DABDDE-30B2-441A-B3B8-14B4426B6A3B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeTurn.Application", "SafeTurn.Application\SafeTurn.Application.csproj", "{B7DABDDE-30B2-441A-B3B8-14B4426B6A3B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

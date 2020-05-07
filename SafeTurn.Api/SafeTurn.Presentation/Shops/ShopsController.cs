@@ -10,8 +10,8 @@ using System.Collections.Generic;
 
 namespace SafeTurn.Api.Turns
 {
-    [Route("[controller]")]
     [ApiController]
+    [Route("[controller]")]
     public class ShopsController : ControllerBase
     {
         private readonly IGetDisponibilityShop _getDisponibilityShop;
@@ -41,13 +41,13 @@ namespace SafeTurn.Api.Turns
         [HttpGet]
         public ActionResult<List<string>> GetByCode(string code)
         {
+            if (String.IsNullOrEmpty(code)) return BadRequest();
             var shops = _getDisponibilityShop.Execute(code);
             if (shops == null) return NoContent();
             return Ok(shops);
         }
 
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("{id}")]
         public ActionResult<List<string>> Get(Guid id)
         {
             var shop = _getShop.Execute(id);

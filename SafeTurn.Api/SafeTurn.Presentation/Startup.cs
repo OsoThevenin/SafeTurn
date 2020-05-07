@@ -23,9 +23,11 @@ namespace PriceManager.Api
         public void ConfigureServices(IServiceCollection services)
         {
             PresistenceRegister.RegisterDbContext(services, Configuration);
+            PresistenceRegister.RegisterIdentity(services);
             PresistenceRegister.RegisterRepository(services, Configuration);
-
             ApplicationRegister.RegisterService(services);
+            services.AddControllers();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,8 +49,18 @@ namespace PriceManager.Api
                 scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
             }
 
-            //app.UseAuthentication();
-            app.UseHttpException();
+            //app.UseHttpsRedirection();
+
+            app.UseRouting();
+            
+            //app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+            
+            //app.UseHttpException();
         }
     }
 }

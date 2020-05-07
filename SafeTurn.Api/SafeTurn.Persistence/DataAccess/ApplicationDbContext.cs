@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SafeTurn.Domain.Shops;
 using SafeTurn.Domain.Turns;
+using SafeTurn.Persistence.DataAccess.Identity;
 
 namespace SafeTurn.Persistence.DataAccess
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
           : base(options)
