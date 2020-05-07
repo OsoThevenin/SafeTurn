@@ -17,13 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
-    <PackageReference Include="ZNetCS.AspNetCore.Logging.EntityFrameworkCore" Version="2.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SafeTurn.Application\SafeTurn.Application.csproj" />
+    <ProjectReference Include="..\SafeTurn.IoC\SafeTurn.IoC.csproj" />
+    <ProjectReference Include="..\SafeTurn.Persistence\SafeTurn.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
