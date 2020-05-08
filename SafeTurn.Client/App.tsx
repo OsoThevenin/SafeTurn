@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Alert, Platform, StatusBar } from 'react-native';
-import Header from './src/components/header';
+import { StyleSheet, View } from 'react-native';
 import Home from './src/screens/home';
 import Settings from './src/screens/settings';
 import { NavigationContainer } from '@react-navigation/native';
@@ -28,6 +27,7 @@ export default function App({ navigation }: { navigation: any }) {
             component={Settings}
             options={{
               title: 'Change Name',
+              headerShown: false
             }}
           />
         </Stack.Navigator>
