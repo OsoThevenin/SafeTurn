@@ -6,16 +6,16 @@ namespace SafeTurn.Application.Shops.GetShopQuery
 {
     public class GetShop : IGetShop
     {
-        private readonly IShopRepository _shopRepo;
+        private readonly IShopQueries _shopQueries;
 
-        public GetShop(IShopRepository shopRepo)
+        public GetShop(IShopQueries shopQueries)
         {
-            _shopRepo = shopRepo;
+            _shopQueries = shopQueries;
         }
 
-        public Shop Execute(Guid id)
+        public GetShopModel Execute(Guid id)
         {
-            return _shopRepo.GetByIdWithTurns(id);
+            return _shopQueries.GetShop(id);
         }
     }
 }

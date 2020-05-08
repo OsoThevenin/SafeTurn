@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PriceManager.Api.Extensions;
 using PriceManager.IoC;
 using SafeTurn.Persistence.DataAccess;
 
@@ -22,9 +21,10 @@ namespace PriceManager.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            PresistenceRegister.RegisterDbContext(services, Configuration);
-            PresistenceRegister.RegisterIdentity(services);
-            PresistenceRegister.RegisterRepository(services, Configuration);
+            PersistenceRegister.RegisterDbContext(services, Configuration);
+            PersistenceRegister.RegisterIdentity(services);
+            PersistenceRegister.RegisterRepository(services);
+            PersistenceRegister.RegisterQueries(services);
             ApplicationRegister.RegisterService(services);
             services.AddControllers();
 

@@ -5,6 +5,6 @@ namespace SafeTurn.Application.Shops.GetShopQuery
 {
     public interface IGetShop
     {
-        Shop Execute(Guid id);
+        GetShopModel Execute(Guid id);
     }
 }

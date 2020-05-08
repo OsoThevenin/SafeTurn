@@ -2,7 +2,7 @@
 using SafeTurn.Application.Interfaces.Persistence;
 using System.Collections.Generic;
 
-namespace SafeTurn.Application.Shops.GetDisponibilityShopQuery
+namespace SafeTurn.Application.Shops.GetDisponibilityShopCommand
 {
     public class GetDisponibilityShop : IGetDisponibilityShop
     {

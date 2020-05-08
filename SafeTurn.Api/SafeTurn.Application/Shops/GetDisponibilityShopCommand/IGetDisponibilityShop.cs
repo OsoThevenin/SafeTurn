@@ -1,4 +1,4 @@
-﻿namespace SafeTurn.Application.Shops.GetDisponibilityShopQuery
+﻿namespace SafeTurn.Application.Shops.GetDisponibilityShopCommand
 {
     public interface IGetDisponibilityShop
     {

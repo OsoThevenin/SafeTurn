@@ -10,7 +10,7 @@ using SafeTurn.Persistence.Turns;
 
 namespace PriceManager.IoC
 {
-    public static class PresistenceRegister
+    public static class PersistenceRegister
     {
         public static void RegisterDbContext(IServiceCollection services, IConfiguration configuration)
         {
@@ -24,12 +24,16 @@ namespace PriceManager.IoC
             services.AddIdentityCore<User>()
                .AddEntityFrameworkStores<ApplicationDbContext>();        }
 
-        public static void RegisterRepository(IServiceCollection services, IConfiguration configuration)
+        public static void RegisterRepository(IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IShopRepository, ShopRepository>();
             services.AddScoped<ITurnRepository, TurnRepository>();
+        }
 
+        public static void RegisterQueries(IServiceCollection services)
+        {
+            services.AddScoped<IShopQueries, ShopQueries>();
         }
     }
 }

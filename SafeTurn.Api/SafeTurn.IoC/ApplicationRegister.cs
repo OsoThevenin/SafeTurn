@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SafeTurn.Application.Shops.CreateShopCommand;
 using SafeTurn.Application.Shops.DeleteShopCommand;
-using SafeTurn.Application.Shops.GetDisponibilityShopQuery;
+using SafeTurn.Application.Shops.GetDisponibilityShopCommand;
 using SafeTurn.Application.Shops.GetShopQuery;
 using SafeTurn.Application.Shops.PublishShopCommand;
 using SafeTurn.Application.Shops.UpdateShopCommand;
