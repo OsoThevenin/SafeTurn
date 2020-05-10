@@ -13,14 +13,16 @@ namespace SafeTurn.Persistence.Shops
     {
         public ShopRepository(ApplicationDbContext database) : base(database) { }
 
-        public Shop GetByCode(string code)
+        public Shop GetByCodeWithTurns(string code)
         {
-            return _database.Shops.SingleOrDefault(s => s.Code.ToUpper() == code.ToUpper());
+            return _database.Shops
+                .Include(s => s.Turns)
+                .SingleOrDefault(s => s.Code.ToUpper() == code.ToUpper());
         }
 
         public Shop GetByIdWithTurns(Guid id)
         {
-            return _database.Shops.AsQueryable()
+            return _database.Shops
                 .Include(s => s.Turns)
                 .SingleOrDefault(s => s.Id == id);
         }

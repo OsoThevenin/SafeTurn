@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SafeTurn.Domain.Shops
 {
-    public class Shop :IEntity
+    public class Shop : IEntity
     {
         public Guid Id { get; set; }
         public string Code { get; set; }
@@ -55,6 +55,8 @@ namespace SafeTurn.Domain.Shops
             SaturdayEnd = new TimeSpan(20, 0, 0);
             SundayStart = new TimeSpan(9, 0, 0);
             SundayEnd = new TimeSpan(20, 0, 0);
+
+            Turns = new List<Turn>();
         }
 
         public void Update(string name, int simultaneousTurns, int minutesForTurn)
@@ -92,7 +94,7 @@ namespace SafeTurn.Domain.Shops
 
         public void SetNewTurn(DateTime dateRangeStart, DateTime dateRangeEnd, string clientName)
         {
-            if (!IsAvailable(dateRangeStart)) throw new Exception("No disponible");
+            //if (!IsAvailable(dateRangeStart)) throw new Exception("No disponible");
             var dateAssign = GetDateAvailable(dateRangeStart);
             Turns.Add(new Turn(Id, dateAssign, clientName, Turns.Select(t => t.Number).ToList()));
         }
@@ -124,43 +126,64 @@ namespace SafeTurn.Domain.Shops
             }
         }
 
-        public bool IsAvailable(DateTime date)
+        public bool IsAvailable(DateTime date, int rangeMinutes)
         {
-            var timeStart = new TimeSpan(date.Hour, date.Minute, date.Second);
-            var timeEnd = new TimeSpan(date.Hour, date.Minute + MinutesForTurn, date.Second);
+            var timeOpemShop = new TimeSpan(date.Hour, date.Minute, date.Second);
+            var timeCloseShop = new TimeSpan(date.Hour, date.Minute + MinutesForTurn, date.Second);
             switch (date.DayOfWeek)
             {
                 case DayOfWeek.Monday:
-                    if (timeEnd > MondayEnd || timeStart < MondayStart) return false;
+                    if (timeCloseShop > MondayEnd || timeOpemShop < MondayStart) return false;
                     break;
                 case DayOfWeek.Tuesday:
-                    if (timeEnd > TuesdayEnd || timeStart < TuesdayStart) return false;
+                    if (timeCloseShop > TuesdayEnd || timeOpemShop < TuesdayStart) return false;
                     break;
                 case DayOfWeek.Wednesday:
-                    if (timeEnd > WednesdayEnd || timeStart < WednesdayStart) return false;
+                    if (timeCloseShop > WednesdayEnd || timeOpemShop < WednesdayStart) return false;
                     break;
                 case DayOfWeek.Thursday:
-                    if (timeEnd > ThursdayEnd || timeStart < ThursdayStart) return false;
+                    if (timeCloseShop > ThursdayEnd || timeOpemShop < ThursdayStart) return false;
                     break;
                 case DayOfWeek.Friday:
-                    if (timeEnd > FridayEnd || timeStart < FridayStart) return false;
+                    if (timeCloseShop > FridayEnd || timeOpemShop < FridayStart) return false;
                     break;
                 case DayOfWeek.Saturday:
-                    if (timeEnd > SaturdayEnd || timeStart < SaturdayStart) return false;
+                    if (timeCloseShop > SaturdayEnd || timeOpemShop < SaturdayStart) return false;
                     break;
                 case DayOfWeek.Sunday:
-                    if (timeEnd > SundayEnd || timeStart < SundayStart) return false;
+                    if (timeCloseShop > SundayEnd || timeOpemShop < SundayStart) return false;
                     break;
             }
-            //TODO: en funció dels turns ja reservats
-            //return Turns.Any(t =>
-            //{
-            //    var time = new TimeSpan(t.Date.Hour, t.Date.Minute, t.Date.Second);
-            //    var rangeMin = timeStart
-            //    return true;
-            //});
 
-            return (new Random()).Next(0, 100) <= 75;
+            if (MinutesForTurn > rangeMinutes) rangeMinutes = MinutesForTurn;
+            var timeRangeInit = new TimeSpan(date.Hour, date.Minute - rangeMinutes, date.Second);
+            var timeRangeEnd = new TimeSpan(date.Hour, date.Minute + rangeMinutes, date.Second);
+
+            var turns = Turns.Where(t =>
+            {
+                if (t.Date.Date != date.Date) return false;  //Descarta los turnos que no son de hoy
+                var timeTurnInit = new TimeSpan(t.Date.Hour, t.Date.Minute, t.Date.Second);
+                var timeTurnEnd = new TimeSpan(t.Date.Hour, t.Date.Minute + MinutesForTurn, t.Date.Second);
+                if (timeRangeInit <= timeTurnInit && timeTurnInit <= timeRangeEnd) return true;  //Muestra el turno si este empieza dentro del margen
+                if (timeRangeInit < timeTurnEnd && timeTurnEnd < timeRangeEnd) return true;  //Muestra el turno si este termina dentro del margen
+                return false;   //Descarta el resto
+            }).OrderBy(t => t.Date).ToList();
+
+            if (turns.Count <= 1) return true;
+
+            var firstTurn = turns[0].Date;
+            if ((new TimeSpan(firstTurn.Hour, firstTurn.Minute, firstTurn.Second) - timeRangeInit).Minutes >= MinutesForTurn)
+                return true;
+            var lastTurnDateEnd = firstTurn.AddMinutes(MinutesForTurn);
+            for (int i = 1; i < turns.Count; i++)
+            {
+                //FIXME: falta mirar el número de turnos
+                var currentTurnDate = turns[i].Date;
+                if ((currentTurnDate - lastTurnDateEnd).Minutes >= MinutesForTurn) return true;
+                lastTurnDateEnd = currentTurnDate.AddMinutes(MinutesForTurn);
+            }
+            if (new TimeSpan(lastTurnDateEnd.Hour, lastTurnDateEnd.Minute, lastTurnDateEnd.Second) <= timeRangeEnd) return true;
+            return false;
         }
     }
 }

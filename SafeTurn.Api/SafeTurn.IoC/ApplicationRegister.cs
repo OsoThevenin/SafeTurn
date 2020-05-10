@@ -9,6 +9,7 @@ using SafeTurn.Application.Turns.ConfirmTurnCommand;
 using SafeTurn.Application.Turns.CreateTurnCommand;
 using SafeTurn.Application.Turns.DeleteTurnCommand;
 using SafeTurn.Application.Turns.RejectTurnCommand;
+using SafeTurn.Application.Utils;
 
 namespace PriceManager.IoC
 {
@@ -29,6 +30,9 @@ namespace PriceManager.IoC
             services.AddScoped<IDeleteShop, DeleteShop>();
             services.AddScoped<IPublishShop, PublishShop>();
             services.AddScoped<IUpdateShop, UpdateShop>();
+
+            //Utils
+            services.AddScoped<IUtilDateTime, UtilDateTime>();
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace SafeTurn.Application.Shops.GetDisponibilityShopCommand
 {
-    public class DisponibilityShopResponse
+    public class GetDisponibilityShopResponse
     {
         public Guid ShopId { get; set; }
         public string ShopName { get; set; }

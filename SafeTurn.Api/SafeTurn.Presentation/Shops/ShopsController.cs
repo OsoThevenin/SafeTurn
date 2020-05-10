@@ -42,7 +42,8 @@ namespace SafeTurn.Api.Turns
         public ActionResult<List<string>> GetByCode(string code)
         {
             if (String.IsNullOrEmpty(code)) return BadRequest();
-            var shops = _getDisponibilityShop.Execute(code);
+            var model = new GetDisponibilityShopModel() { Code = code };
+            var shops = _getDisponibilityShop.Execute(model);
             if (shops == null) return NoContent();
             return Ok(shops);
         }

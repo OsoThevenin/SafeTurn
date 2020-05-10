@@ -2,6 +2,6 @@
 {
     public interface IGetDisponibilityShop
     {
-        DisponibilityShopResponse Execute(string code);
+        GetDisponibilityShopResponse Execute(GetDisponibilityShopModel model);
     }
 }

@@ -21,7 +21,6 @@ namespace SafeTurn.Application.Shops.CreateShopCommand
         {
             _shopRepo.Add(new Shop(model.Code, model.Name));
             _uow.Save();
-
         }
     }
 }

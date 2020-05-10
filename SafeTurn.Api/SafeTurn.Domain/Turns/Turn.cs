@@ -27,6 +27,7 @@ namespace SafeTurn.Domain.Turns
 
         public void ConfirmTurn()
         {
+            if (Confirmed) throw new TurnExceptionAlreadyEXist();
             Confirmed = true;
         }
 
