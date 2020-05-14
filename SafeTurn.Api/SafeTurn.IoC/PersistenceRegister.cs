@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SafeTurn.Application.Interfaces.Persistence;
 using SafeTurn.Persistence.DataAccess;
-using SafeTurn.Persistence.DataAccess.Identity;
+using SafeTurn.Persistence.Identity;
 using SafeTurn.Persistence.Shared;
 using SafeTurn.Persistence.Shops;
 using SafeTurn.Persistence.Turns;
@@ -14,15 +14,18 @@ namespace PriceManager.IoC
     {
         public static void RegisterDbContext(IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddEntityFrameworkSqlServer();
-            services.AddDbContext<ApplicationDbContext>((sp, options) =>
-                options.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddDbContext<AppIdentityDbContext>(c => 
+                c.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddDbContext<ApplicationDbContext>(c =>
+                c.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]));
         }
 
         public static void RegisterIdentity(IServiceCollection services)
         {
-            services.AddIdentityCore<User>()
-               .AddEntityFrameworkStores<ApplicationDbContext>();        }
+            services.AddIdentityCore<AppUser>()
+               .AddEntityFrameworkStores<AppIdentityDbContext>()
+               .AddDefaultTokenProvider();
+        }
 
         public static void RegisterRepository(IServiceCollection services)
         {

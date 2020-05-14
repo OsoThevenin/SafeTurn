@@ -5,12 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SafeTurn.Persistence.DataAccess;
+using SafeTurn.Persistence.Identity;
 
-namespace SafeTurn.Persistence.DataAccess.Migrations
+namespace SafeTurn.Persistence.Identity.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200507212301_Initial")]
+    [DbContext(typeof(AppIdentityDbContext))]
+    [Migration("20200514113928_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -152,103 +152,7 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("SafeTurn.Domain.Shops.Shop", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeSpan>("FridayEnd")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("FridayStart")
-                        .HasColumnType("time");
-
-                    b.Property<int>("MinutesForTurn")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("MondayEnd")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("MondayStart")
-                        .HasColumnType("time");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Published")
-                        .HasColumnType("bit");
-
-                    b.Property<TimeSpan>("SaturdayEnd")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("SaturdayStart")
-                        .HasColumnType("time");
-
-                    b.Property<int>("SimultaneousTurns")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("SundayEnd")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("SundayStart")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("ThursdayEnd")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("ThursdayStart")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("TuesdayEnd")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("TuesdayStart")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("WednesdayEnd")
-                        .HasColumnType("time");
-
-                    b.Property<TimeSpan>("WednesdayStart")
-                        .HasColumnType("time");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Shops");
-                });
-
-            modelBuilder.Entity("SafeTurn.Domain.Turns.Turn", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ClientName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Confirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Number")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("ShopId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ShopId");
-
-                    b.ToTable("Turns");
-                });
-
-            modelBuilder.Entity("SafeTurn.Persistence.DataAccess.Identity.User", b =>
+            modelBuilder.Entity("SafeTurn.Persistence.Identity.AppUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -324,7 +228,7 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SafeTurn.Persistence.DataAccess.Identity.User", null)
+                    b.HasOne("SafeTurn.Persistence.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -333,7 +237,7 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SafeTurn.Persistence.DataAccess.Identity.User", null)
+                    b.HasOne("SafeTurn.Persistence.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -348,7 +252,7 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SafeTurn.Persistence.DataAccess.Identity.User", null)
+                    b.HasOne("SafeTurn.Persistence.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -357,18 +261,9 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SafeTurn.Persistence.DataAccess.Identity.User", null)
+                    b.HasOne("SafeTurn.Persistence.Identity.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("SafeTurn.Domain.Turns.Turn", b =>
-                {
-                    b.HasOne("SafeTurn.Domain.Shops.Shop", "Shop")
-                        .WithMany("Turns")
-                        .HasForeignKey("ShopId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

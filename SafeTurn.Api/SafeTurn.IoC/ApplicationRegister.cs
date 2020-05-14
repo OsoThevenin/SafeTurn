@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using SafeTurn.Application.Auth.AuthenticateCommand;
 using SafeTurn.Application.Shops.CreateShopCommand;
 using SafeTurn.Application.Shops.DeleteShopCommand;
 using SafeTurn.Application.Shops.GetDisponibilityShopCommand;
@@ -17,6 +18,9 @@ namespace PriceManager.IoC
     {
         public static void RegisterService(IServiceCollection services)
         {
+            // Auth
+            services.AddScoped<IAuthenticate, Authenticate>();
+
             // Turns
             services.AddScoped<ICreateTurn, CreateTurn>();
             services.AddScoped<IDeleteTurn, DeleteTurn>();

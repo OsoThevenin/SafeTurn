@@ -15,7 +15,7 @@ namespace SafeTurn.Domain.Turns
         public string ClientName { get; set; }
         public bool Confirmed { get; set; }
 
-        private Turn() { }
+        private Turn() { /* Required by EF */ }
 
         public Turn(Guid shopId, DateTime date, string clientName, List<int> numbersUsed)
         {

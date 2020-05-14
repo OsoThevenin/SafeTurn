@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PriceManager.IoC;
 using SafeTurn.Persistence.DataAccess;
+using SafeTurn.Persistence.Identity;
 
 namespace PriceManager.Api
 {
@@ -47,6 +48,7 @@ namespace PriceManager.Api
             using (var scope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 scope.ServiceProvider.GetRequiredService<ApplicationDbContext>().Database.Migrate();
+                scope.ServiceProvider.GetRequiredService<AppIdentityDbContext>().Database.Migrate();
             }
 
             //app.UseHttpsRedirection();

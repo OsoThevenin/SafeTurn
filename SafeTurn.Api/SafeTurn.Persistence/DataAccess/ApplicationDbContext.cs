@@ -1,17 +1,20 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SafeTurn.Domain.Shops;
 using SafeTurn.Domain.Turns;
-using SafeTurn.Persistence.DataAccess.Identity;
+using SafeTurn.Domain.Users;
+using SafeTurn.Persistence.Shops;
+using SafeTurn.Persistence.Turns;
+using SafeTurn.Persistence.Users;
 
 namespace SafeTurn.Persistence.DataAccess
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
           : base(options)
         { }
 
+        public DbSet<User> Users { get; set; }
         public DbSet<Turn> Turns { get; set; }
         public DbSet<Shop> Shops { get; set; }
 
@@ -19,6 +22,9 @@ namespace SafeTurn.Persistence.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new ShopConfiguration());
+            modelBuilder.ApplyConfiguration(new TurnConfiguration());
         }
 
         public void Save()
