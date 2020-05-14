@@ -7,6 +7,7 @@ using SafeTurn.Persistence.Identity;
 using SafeTurn.Persistence.Shared;
 using SafeTurn.Persistence.Shops;
 using SafeTurn.Persistence.Turns;
+using SafeTurn.Persistence.Users;
 
 namespace PriceManager.IoC
 {
@@ -23,8 +24,7 @@ namespace PriceManager.IoC
         public static void RegisterIdentity(IServiceCollection services)
         {
             services.AddIdentityCore<AppUser>()
-               .AddEntityFrameworkStores<AppIdentityDbContext>()
-               .AddDefaultTokenProvider();
+               .AddEntityFrameworkStores<AppIdentityDbContext>();
         }
 
         public static void RegisterRepository(IServiceCollection services)
@@ -32,6 +32,7 @@ namespace PriceManager.IoC
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IShopRepository, ShopRepository>();
             services.AddScoped<ITurnRepository, TurnRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         public static void RegisterQueries(IServiceCollection services)

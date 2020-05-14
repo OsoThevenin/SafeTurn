@@ -21,9 +21,9 @@ namespace SafeTurn.Persistence.Users
             _userManager = userManager;
         }
 
-        public async Task<User> CreateAsync(string firstName, string lastName, string email, string userName, string password)
+        public async Task CreateAsync(string firstName, string lastName, string email, string password)
         {
-            var appUser = new AppUser { Email = email, UserName = userName };
+            var appUser = new AppUser { Email = email, UserName = email };
             var identityResult = await _userManager.CreateAsync(appUser, password);
 
             if (!identityResult.Succeeded) throw new Exception("not valid");
@@ -31,8 +31,6 @@ namespace SafeTurn.Persistence.Users
             var user = new User(firstName, lastName, appUser.Id, appUser.UserName);
             _database.Users.Add(user);
             _database.Save();
-
-            return user;
         }
 
         public User FindByName(string userName)
