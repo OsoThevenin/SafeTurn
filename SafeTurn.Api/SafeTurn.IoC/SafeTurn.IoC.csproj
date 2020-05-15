@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SafeTurn.Application\SafeTurn.Application.csproj" />
     <ProjectReference Include="..\SafeTurn.Persistence\SafeTurn.Persistence.csproj" />
+    <ProjectReference Include="..\SafeTurn.Infrastucture\SafeTurn.Infrastucture.csproj" />
   </ItemGroup>
 
 </Project>

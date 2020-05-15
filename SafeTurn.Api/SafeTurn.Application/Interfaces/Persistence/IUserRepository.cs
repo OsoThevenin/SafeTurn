@@ -6,6 +6,8 @@ namespace SafeTurn.Application.Interfaces.Persistence
     public interface IUserRepository
     {
         User GetByUserName(string userName);
-        Task CreateAsync(string firstName, string lastName, string email, string password);
+        Task<CreateUserResponse> CreateAsync(string firstName, string lastName, string email, string password);
+        Task DeleteAsync(string email);
+        Task<string> GetTokenEmailAsync(string email);
     }
 }

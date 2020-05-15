@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using SafeTurn.Application.Auth.AuthenticateCommand;
@@ -36,8 +37,9 @@ namespace SafeTurn.Api.Login
         {
             try
             {
-                await _register.ExecuteAsync(model);
-                return Ok();
+                var response = await _register.ExecuteAsync(model);
+                if (response.IsSuccess) return Ok();
+                return BadRequest(response.Errors.Select(e => e.Message));
             }
             catch (Exception e)
             {

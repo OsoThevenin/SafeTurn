@@ -26,7 +26,8 @@ namespace PriceManager.Api
             PersistenceRegister.RegisterIdentity(services);
             PersistenceRegister.RegisterRepository(services);
             PersistenceRegister.RegisterQueries(services);
-            ApplicationRegister.RegisterService(services);
+            ApplicationRegister.RegisterServices(services);
+            InfrastuctureRegister.RegisterServices(services);
             services.AddControllers();
 
         }

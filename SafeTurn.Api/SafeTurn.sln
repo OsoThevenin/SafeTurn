@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeTurn.Persistence", "Saf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeTurn.Application", "SafeTurn.Application\SafeTurn.Application.csproj", "{B7DABDDE-30B2-441A-B3B8-14B4426B6A3B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeTurn.Infrastucture", "SafeTurn.Infrastucture\SafeTurn.Infrastucture.csproj", "{230BB359-BB36-46DD-92BF-EA56F4A1FF90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B7DABDDE-30B2-441A-B3B8-14B4426B6A3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7DABDDE-30B2-441A-B3B8-14B4426B6A3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7DABDDE-30B2-441A-B3B8-14B4426B6A3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{230BB359-BB36-46DD-92BF-EA56F4A1FF90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{230BB359-BB36-46DD-92BF-EA56F4A1FF90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{230BB359-BB36-46DD-92BF-EA56F4A1FF90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{230BB359-BB36-46DD-92BF-EA56F4A1FF90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

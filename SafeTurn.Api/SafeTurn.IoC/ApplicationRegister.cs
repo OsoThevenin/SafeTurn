@@ -17,7 +17,7 @@ namespace PriceManager.IoC
 {
     public static class ApplicationRegister
     {
-        public static void RegisterService(IServiceCollection services)
+        public static void RegisterServices(IServiceCollection services)
         {
             // Auth
             services.AddScoped<IAuthenticate, Authenticate>();

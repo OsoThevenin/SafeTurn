@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
+using SafeTurn.Domain.Users;
 
 namespace SafeTurn.Application.Auth.RegisterCommand
 {
     public interface IRegister
     {
-        Task ExecuteAsync(RegisterModel model);
+        Task<CreateUserResponse> ExecuteAsync(RegisterModel model);
     }
 }
