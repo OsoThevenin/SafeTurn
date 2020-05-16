@@ -21,5 +21,10 @@ Execute this command for APP:
 
 ## Develop with Mac
 
-- Need docker
+Need docker
+
+- SQL Server
 > `docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Sample123$" -p 1433:1433 --name sqlserver2017withoutmount -d mcr.microsoft.com/mssql/server:2017-latest`
+
+- Smtp 4 dev
+> `docker run -p 3000:80 -p 2525:25 rnwood/smtp4dev:v3`

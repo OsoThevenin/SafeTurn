@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SafeTurn.Application.Interfaces.Persistence;
@@ -19,12 +20,6 @@ namespace PriceManager.IoC
                 c.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]));
             services.AddDbContext<ApplicationDbContext>(c =>
                 c.UseSqlServer(configuration["ConnectionStrings:DefaultConnection"]));
-        }
-
-        public static void RegisterIdentity(IServiceCollection services)
-        {
-            services.AddIdentityCore<AppUser>()
-               .AddEntityFrameworkStores<AppIdentityDbContext>();
         }
 
         public static void RegisterRepository(IServiceCollection services)

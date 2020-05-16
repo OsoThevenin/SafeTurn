@@ -10,7 +10,7 @@ using SafeTurn.Persistence.DataAccess;
 namespace SafeTurn.Persistence.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200514083116_Initial")]
+    [Migration("20200516175731_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -153,6 +153,9 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IdentityId")
                         .HasColumnType("nvarchar(max)");

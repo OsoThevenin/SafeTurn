@@ -152,6 +152,9 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IdentityId")
                         .HasColumnType("nvarchar(max)");
 

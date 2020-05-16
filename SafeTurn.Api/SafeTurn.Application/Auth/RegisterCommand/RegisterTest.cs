@@ -1,20 +1,25 @@
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Moq;
+using SafeTurn.Application.Interfaces.Infrastucture;
 using SafeTurn.Application.Interfaces.Persistence;
-using SafeTurn.Domain.User;
 using Xunit;
 
 namespace SafeTurn.Application.Auth.RegisterCommand
 {
     public class RegisterTest
     {
-        private readonly Mock<IUserRepository> _userRepo; 
+        private readonly Mock<IConfiguration> _config;
+        private readonly Mock<IUserRepository> _userRepo;
+        private readonly Mock<IEmailService> _emailService;
         private readonly Register _service;
 
         public RegisterTest()
         {
+            _config = new Mock<IConfiguration>();
             _userRepo = new Mock<IUserRepository>();
-            _service = new Register(_userRepo.Object);
+            _emailService = new Mock<IEmailService>();
+            _service = new Register(_config.Object, _userRepo.Object, _emailService.Object);
         }
 
         [Fact]

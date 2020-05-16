@@ -10,7 +10,6 @@ namespace SafeTurn.Persistence.Users
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Ignore(x => x.Email);
             builder.Ignore(x => x.PasswordHash);
         }
     }

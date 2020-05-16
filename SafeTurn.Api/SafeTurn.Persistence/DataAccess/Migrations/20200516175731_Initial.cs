@@ -44,7 +44,8 @@ namespace SafeTurn.Persistence.DataAccess.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
                     Surname = table.Column<string>(nullable: true),
-                    IdentityId = table.Column<string>(nullable: true)
+                    IdentityId = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

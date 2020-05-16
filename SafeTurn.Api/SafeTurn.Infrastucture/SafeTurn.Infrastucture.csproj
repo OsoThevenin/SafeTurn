@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Mailer\Templates\RegisterConfirmation.cshtml" />
+  </ItemGroup>
+
+
+  <ItemGroup>
     <ProjectReference Include="..\SafeTurn.Application\SafeTurn.Application.csproj" />
   </ItemGroup>
 

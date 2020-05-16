@@ -14,7 +14,7 @@ namespace SafeTurn.Infrastucure.Mailer
             _smtpClient = smtpClient;
         }
 
-        public async Task SendRegisterConfirmationEmailAsync(string email, string name, string callbackUrl, string clientUrl)
+        public async Task SendRegisterConfirmationEmailAsync(string email, string name, string callbackUrl)
         {
             await SendEmailWithCallbackUrlAsync(
                 email,
@@ -24,7 +24,7 @@ namespace SafeTurn.Infrastucure.Mailer
                     CallbackUrl = callbackUrl
                 },
                 "Confrimacion de registro",
-                "SafeTurn.Infrastucure.Mailer.Template.RegisterConfirmation.cshtml"
+                "SafeTurn.Infrastucure.Mailer.Templates.RegisterConfirmation.cshtml"
             );
         }
 

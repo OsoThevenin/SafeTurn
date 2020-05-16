@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using SafeTurn.Application.Interfaces.Infrastucture;
 using SafeTurn.Application.Interfaces.Persistence;
 using SafeTurn.Domain.Users;
+using System;
+using System.Collections.Generic;
 
 namespace SafeTurn.Application.Auth.RegisterCommand
 {
@@ -27,7 +29,8 @@ namespace SafeTurn.Application.Auth.RegisterCommand
         public async Task<CreateUserResponse> ExecuteAsync(RegisterModel model)
         {
             var response = await CreateUser(model);
-            if (response.IsSuccess) response = await SendConfirmationEmail(model);
+            if (!response.IsSuccess) return response;
+            response = await SendConfirmationEmail(model);
             if (!response.IsSuccess)
             {
                 await DeleteUser(model.Email);
@@ -57,17 +60,26 @@ namespace SafeTurn.Application.Auth.RegisterCommand
 
         private async Task<CreateUserResponse> SendConfirmationEmail(RegisterModel model)
         {
-            var token = _userRepo.GetTokenEmailAsync(model.Email);
-            var callbackLink = _config["Smtp:ClientUrl"]
-                + 
             try
             {
-                _emailService.SendRegisterConfirmationEmailAsync(model.Email, model.Name, )
+                var token = await _userRepo.GetTokenEmailAsync(model.Email);
+                var callbackUrl = _config["Smtp:ClientUrl"]
+                    + "login/valid_token/"
+                    + model.Email + "/"
+                    + Uri.EscapeDataString(token);
+                await _emailService.SendRegisterConfirmationEmailAsync(model.Email, model.Name, callbackUrl);
+                return new CreateUserResponse()
+                {
+                    IsSuccess = true
+                };
             }
-            catch (System.Exception)
+            catch (Exception e)
             {
-                
-                throw;
+                return new CreateUserResponse()
+                {
+                    IsSuccess = false,
+                    Errors = new List<Exception>() { e }
+                };
             }
         }
 
